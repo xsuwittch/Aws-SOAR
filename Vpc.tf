@@ -19,6 +19,7 @@ resource "aws_vpc" "Soar_VPC" {
   }
 }
 
+//gateway
 resource "aws_internet_gateway" "soar_gateway" {
   vpc_id = aws_vpc.Soar_VPC.id
   tags = {
@@ -26,7 +27,21 @@ resource "aws_internet_gateway" "soar_gateway" {
   }
 }
 
+// route table
 
+resource "aws_route_table" "soar_route_table" {
+  vpc_id = aws_vpc.Soar_VPC.id
+  tags = {
+    Name = "soar_route_table"
+  }
+}
+
+//route
+resource "aws_route" "Outgoing_traffic" {
+  destination_cidr_block = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.soar_gateway.vpc_id
+  route_table_id = aws_route_table.soar_route_table.id
+}
 
 // Private subnet 1a
 resource "aws_subnet" "sub_private_1" {
@@ -39,16 +54,7 @@ resource "aws_subnet" "sub_private_1" {
 
 }
 
-//Private subnet 1b
-resource "aws_subnet" "sub_private_2" {
-  vpc_id = aws_vpc.Soar_VPC.id
-  cidr_block = "10.0.0.0/24"
-  availability_zone = "ap-south-1b"
-  tags = {
-    name = "soar_private_1b"
-  }
 
-}
 //Public subnet 1a
 resource "aws_subnet" "sub_public_1" {
   vpc_id = aws_vpc.Soar_VPC.id
@@ -61,14 +67,3 @@ resource "aws_subnet" "sub_public_1" {
 
 }
 
-//Public subnet 1b
-resource "aws_subnet" "sub_public_2" {
-  vpc_id = aws_vpc.Soar_VPC.id
-  cidr_block = "10.0.0.0/24"
-  map_public_ip_on_launch = true
-  availability_zone = "ap-south-1b"
-  tags = {
-    name = "soar_public_1b"
-  }
-
-}
