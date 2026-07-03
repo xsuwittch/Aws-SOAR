@@ -26,15 +26,7 @@ resource "aws_internet_gateway" "soar_gateway" {
   }
 }
 
-resource "aws_subnet" "sub_public" {
-  vpc_id = aws_vpc.Soar_VPC.id
-  cidr_block = "10.0.0.0/24"
-  availability_zone = "ap-south-1a"
-  tags = {
-    name = "soar_public"
-  }
 
-}
 
 // Private subnet 1a
 resource "aws_subnet" "sub_private_1" {
