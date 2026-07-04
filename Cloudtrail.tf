@@ -1,3 +1,6 @@
+/*
+Cloud trail skipped
+
 resource "aws_s3_bucket_public_access_block" "cloudtrail_block" {
   bucket = aws_s3_bucket.cloudtrail_bucket.id
 
@@ -6,4 +9,4 @@ resource "aws_s3_bucket_public_access_block" "cloudtrail_block" {
   ignore_public_acls      = true // ignore public ACLs for the bucket
   restrict_public_buckets = true // restrict public bucket policies for the bucket
 }
-
+*/ 
