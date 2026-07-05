@@ -3,7 +3,7 @@ resource "aws_instance" "victim" {
   ami           = "ami-0aba19e56f3eaec05"
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.sub_private_1.id
-  security_groups = [ aws_security_group.victim_sg ]
+  vpc_security_group_ids = [ aws_security_group.victim_sg.id ]
   tags = {
     Name = "victim"
   }
@@ -15,7 +15,7 @@ resource "aws_instance" "Attacker" {
   ami           = "ami-0aba19e56f3eaec05"
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.sub_public_1.id
-  security_groups = [ aws_security_group.attacker_sg ]
+  vpc_security_group_ids = [ aws_security_group.attacker_sg.id ]
   tags = {
     Name = "attacker"
   }
