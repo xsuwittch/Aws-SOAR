@@ -1,6 +1,6 @@
 //Private Victim
 resource "aws_instance" "victim" {
-  ami           = "ami-0aba19e56f3eaec05"
+  ami           = "ami-01a00762f46d584a1"
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.sub_private_1.id
   vpc_security_group_ids = [ aws_security_group.victim_sg.id ]
@@ -12,7 +12,7 @@ resource "aws_instance" "victim" {
 
 // Public Attacker
 resource "aws_instance" "Attacker" {
-  ami           = "ami-0aba19e56f3eaec05"
+  ami           = "ami-01a00762f46d584a1"
   instance_type = "t3.micro"
   subnet_id     = aws_subnet.sub_public_1.id
   vpc_security_group_ids = [ aws_security_group.attacker_sg.id ]
