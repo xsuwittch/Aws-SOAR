@@ -14,6 +14,7 @@ resource "aws_instance" "victim" {
 resource "aws_instance" "Attacker" {
   ami           = "ami-01a00762f46d584a1"
   instance_type = "t3.micro"
+  key_name = aws_key_pair.soar_key.key_name
   subnet_id     = aws_subnet.sub_public_1.id
   vpc_security_group_ids = [ aws_security_group.attacker_sg.id ]
   tags = {
@@ -82,4 +83,9 @@ resource "aws_security_group" "quarantine_sg" {
   tags = {
     name = "quarantine SG"
   }
+}
+
+resource "aws_key_pair" "soar_key" {
+  key_name = "name"
+  public_key = file("~/.ssh/soar_key.pub")
 }
