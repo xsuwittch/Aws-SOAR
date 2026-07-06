@@ -30,7 +30,12 @@ resource "aws_cloudwatch_event_target" "guardduty_finding_target" {
   target_id = "GuardDutyFindingTarget"
   arn       = aws_sns_topic.guardduty_sns_topic.arn
 }
-
+//target set to lambda fucntion
+resource "aws_cloudwatch_event_target" "guardduty_lambda_target" {
+  rule      = aws_cloudwatch_event_rule.guardduty_finding_rule.name
+  target_id = "GuardDutyLambdaTarget"
+  arn       = aws_lambda_function.quarantine_lambda.arn
+}
 
 // policy to allow EventBridge to publish to the SNS topic
 resource "aws_sns_topic_policy" "allow_eventbridge" {
