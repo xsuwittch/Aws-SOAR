@@ -1,6 +1,7 @@
 resource "aws_iam_role" "Lambda_access" {
-  name = "Lambda access to instance attributes"
-  assume_role_policy = jsondecode({
+  name = "Lambda-remediation-role"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
     Statement = [
       {
         Action = "sts:AssumeRole"
@@ -15,7 +16,7 @@ resource "aws_iam_role" "Lambda_access" {
 
 resource "aws_iam_role_policy" "lambda_policy" {
   name   = "lambda-remediation-policy"
-  role   = aws_iam_role.lambda_role.id
+  role   = aws_iam_role.Lambda_access.id
 
   policy = jsonencode({
     Version = "2012-10-17"
