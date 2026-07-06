@@ -86,6 +86,6 @@ resource "aws_security_group" "quarantine_sg" {
 }
 
 resource "aws_key_pair" "soar_key" {
-  key_name = "name"
+  key_name = "soar_key"
   public_key = file("~/.ssh/soar_key.pub")
 }
