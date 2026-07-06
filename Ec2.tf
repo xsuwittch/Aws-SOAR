@@ -71,3 +71,15 @@ resource "aws_security_group" "victim_sg" {
       name = "victim SG"
     }
 }
+
+//Quarnatine SG
+resource "aws_security_group" "quarantine_sg" {
+  name = "quarantine_sg"
+  description = "Security group for quarantined instances"
+  vpc_id = aws_vpc.Soar_VPC.id
+
+  // No inbound or outbound rules, as this SG is used to isolate instances
+  tags = {
+    name = "quarantine SG"
+  }
+}
